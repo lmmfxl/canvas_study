@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas_入门</title>
+</head>
+<body>
+    <canvas id="demo" width="600" height="600">
+        你的浏览器不支持canvas，请更换浏览器
+    </canvas>
+
+    <script>
+        <!--拿到canvas标签-->
+        const canvas = document.querySelector("#demo");
+        // 获得canvas上下文
+        const ctx = canvas.getContext('2d');
+        // 绘制
+        ctx.moveTo(100,100);
+        ctx.lineTo(200,100);
+        ctx.lineTo(100,200);
+        ctx.closePath(); //闭合路径
+        ctx.lineWidth = 4;//设置描边线粗，在描边之前设置
+        ctx.strokeStyle = 'red';//设置描边样式，在描边之前设置
+        ctx.stroke();//描边
+
+        ctx.fillStyle = 'green';
+        ctx.fill();
+    </script>
+</body>
+</html>

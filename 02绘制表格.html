@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制表格</title>
+</head>
+<body>
+    <canvas id="table">
+
+    </canvas>
+
+    <script>
+        const canvas = document.querySelector("#table");
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 600;
+        canvas.height = 600;
+        canvas.style.border = "1px solid #000";
+
+        const rectW = 10;
+
+        for (let i=0;i<canvas.width/rectW;i++){
+            ctx.moveTo(0,i*rectW);
+            ctx.lineTo(canvas.width,i*rectW);
+            ctx.moveTo(i*rectW,0);
+            ctx.lineTo(i*rectW,canvas.height);
+        }
+            ctx.lineWidth=.5;
+            ctx.stroke();
+    </script>
+</body>
+</html>

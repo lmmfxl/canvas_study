@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>理解基于状态的绘图</title>
+    <style>
+        .container {
+            margin:100px auto;
+        }
+        canvas {
+            margin:0 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="demo">
+
+        </canvas>
+    </div>
+
+    <script>
+        (function () {
+            const can = document.querySelector("#demo");
+            const ctx = can.getContext('2d');
+
+            can.width = 600;
+            can.height = 600;
+            can.style.border = "1px solid #000";
+            can.clientWidth=20;
+
+        })();
+    </script>
+</body>
+</html>
