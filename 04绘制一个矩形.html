@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制一个矩形</title>
+    <style>
+        #demo {
+            margin:100px 500px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="demo">
+
+    </canvas>
+
+    <script>
+        const can = document.querySelector("#demo");
+        const ctx = can.getContext('2d');
+
+        can.width = 600;
+        can.height=600;
+        can.style.border = "1px solid #000";
+
+        //绘制一个简单矩形
+        ctx.rect(100,100,50,50);
+        ctx.stroke();
+
+        //描边矩形
+        ctx.strokeRect(200,200,100,150);
+
+        //填充矩形
+        ctx.fillRect(300,300,50,50);
+    </script>
+</body>
+</html>
