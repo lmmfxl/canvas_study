@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绘制饼状图</title>
+    <style>
+        #demo {
+            margin:100px 500px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="demo">
+
+    </canvas>
+
+    <script>
+        (function () {
+            const can = document.querySelector("#demo");
+            const ctx = can.getContext('2d');
+
+            can.width = 600;
+            can.height = 600;
+            can.style.border="1px solid #000";
+
+            // ctx.moveTo(300,300);
+            // ctx.arc(300,300,100,0*Math.PI/180,30*Math.PI/180,true);
+            // ctx.closePath();
+            // ctx.stroke();
+            // ctx.fill();
+
+            //饼状图案例
+            // ctx.moveTo(300,300);
+            // ctx.arc(300,300,100,-90*Math.PI/180,-30*Math.PI/180);
+            // ctx.fillStyle = 'red';
+            // ctx.fill();
+
+
+            //根据数据绘制饼状图
+            const data =[{
+                "value":.2,
+                "color":'red',
+                "title":'应届生'
+            }, {
+                "value": .3,
+                "color": 'blue',
+                "title": "社会招生"
+            }, {
+                "value": .4,
+                "color": 'green',
+                "title": "老学员推荐"
+            },{
+                "value":.1,
+                "color":'#ccc',
+                title:"公开课"
+            }];
+
+            let start = -90;
+            for (let i=0;i<data.length;i++){
+                ctx.moveTo(400,400);
+                ctx.beginPath();
+                ctx.fillStyle = data[i].color;
+                let angle = data[i].value*360*Math.PI/180;
+                console.log(angle);
+                let sta = start*Math.PI/180;
+                console.log(sta);
+                let end = (sta + angle);
+                console.log(end);
+
+                ctx.arc(400,400,200,sta,end);
+                ctx.fill();
+                sta = end;
+            }
+
+
+
+
+        })();
+    </script>
+</body>
+</html>
