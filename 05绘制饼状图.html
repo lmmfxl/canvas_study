@@ -41,11 +41,11 @@
                 "value":.2,
                 "color":'red',
                 "title":'应届生'
-            }, {
+            },{
                 "value": .3,
                 "color": 'blue',
                 "title": "社会招生"
-            }, {
+            },{
                 "value": .4,
                 "color": 'green',
                 "title": "老学员推荐"
@@ -57,19 +57,20 @@
 
             let start = -90;
             for (let i=0;i<data.length;i++){
-                ctx.moveTo(400,400);
                 ctx.beginPath();
+                ctx.moveTo(300,300);
                 ctx.fillStyle = data[i].color;
                 let angle = data[i].value*360*Math.PI/180;
-                console.log(angle);
                 let sta = start*Math.PI/180;
-                console.log(sta);
                 let end = (sta + angle);
-                console.log(end);
 
-                ctx.arc(400,400,200,sta,end);
+                ctx.arc(300,300,200,sta,end);
                 ctx.fill();
-                sta = end;
+
+                //百分比文字展示
+                
+
+                start = start + data[i].value*360;
             }
 
 
