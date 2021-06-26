@@ -56,6 +56,7 @@
             }];
 
             let start = -90;
+            ctx.font = '20px "微软雅黑"';
             for (let i=0;i<data.length;i++){
                 ctx.beginPath();
                 ctx.moveTo(300,300);
@@ -68,7 +69,17 @@
                 ctx.fill();
 
                 //百分比文字展示
-                
+                let begin = sta + angle/2;
+                if (begin > 90*Math.PI/180 && begin<270*Math.PI/180){
+                    ctx.textAlign = "end";
+                }
+                console.log(begin);
+                let xPoint = 300 + Math.cos(begin)*(200+40);
+                console.log(xPoint);
+                let yPoint = 300 + Math.sin(begin)*(200+40);
+                console.log(yPoint);
+
+                ctx.fillText(data[i].value*100+"%",xPoint,yPoint);
 
                 start = start + data[i].value*360;
             }
