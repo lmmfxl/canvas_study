@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07绘制序列帧动画</title>
+    <style>
+        canvas {
+            margin:200px 500px 20px 500px;
+        }
+        div {
+            margin:0 500px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="demo">
+
+    </canvas>
+    <div>
+        <button id="left">←</button>
+        <button id="up">↑</button>
+        <button id="right">→</button>
+        <button id="down">↓</button>
+    </div>
+
+    <script>
+        (function () {
+            const demo = document.querySelector("#demo");
+            const ctx = demo.getContext("2d");
+
+            demo.width = 600;
+            demo.height = 600;
+            demo.style.border = "1px solid #000";
+
+            const img = new Image();
+            img.src = 'imgs/gameImgs/DMMban.png';
+            let frameIndex = 0;
+            let directionIndex = 0;
+
+            setInterval(function () {
+                ctx.clearRect(0,0,demo.width,demo.height);
+                ctx.drawImage(
+                    img,
+                    img.width/4*frameIndex,
+                    directionIndex * 65,
+                    40,
+                    65,
+                    200,
+                    200,
+                    80,
+                    130
+                );
+                frameIndex ++;
+                frameIndex %=4;
+
+            },1000/5);
+
+            const left = document.querySelector("#left");
+            const up = document.querySelector("#up");
+            const right = document.querySelector("#right");
+            const down = document.querySelector("#down");
+
+            left.addEventListener("click",function () {
+                directionIndex = 1;
+            })
+            right.addEventListener("click",function () {
+                directionIndex = 2;
+            })
+            up.addEventListener("click",function () {
+                directionIndex = 3;
+            })
+            down.addEventListener("click",function () {
+                directionIndex = 0;
+            })
+        })();
+    </script>
+</body>
+</html>

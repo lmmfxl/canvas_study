@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06图片绘制</title>
+    <style>
+        canvas {
+            margin:200px 500px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="demo">
+
+    </canvas>
+
+    <script>
+        (function () {
+            const demo = document.querySelector("#demo");
+            const ctx = demo.getContext('2d');
+
+            demo.width = 600;
+            demo.height = 600;
+            demo.style.border = '1px solid #000';
+
+            const img1 = new Image();
+            img1.src = "imgs/a.jpg";
+            img1.onload = function(){
+                ctx.drawImage(img1,0,0);
+            }
+
+            const img2 = new Image();
+            img2.src = 'imgs/gameImgs/DMMban.png';
+            img2.onload = function () {
+                ctx.drawImage(img2,img2.width/4,img2.height/4,img2.width/4,img2.height/4,200,200,img2.width/4,img2.height/4);
+
+            }
+
+
+        })();
+    </script>
+</body>
+</html>
