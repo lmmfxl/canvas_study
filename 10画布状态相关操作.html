@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10画布状态相关操作</title>
+    <style>
+        #demo {
+            margin: 80px 500px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="demo"></canvas>
+    <script>
+        (function () {
+            const demo = document.querySelector("#demo");
+            const ctx = demo.getContext('2d');
+
+            demo.width = 600;
+            demo.height = 600;
+            demo.style.border = '1px solid #000';
+
+            ctx.moveTo(10,10);
+
+            ctx.fillStyle = 'red';
+            ctx.fillRect(10,10,80,80);
+            ctx.save();
+
+            ctx.translate(200,200);
+            ctx.rotate(45 * Math.PI /180);
+            ctx.scale(2,2);
+            ctx.fillStyle = 'green';
+            ctx.globalAlpha = .3;
+            ctx.fillRect(0,0,80,80);
+            ctx.moveTo(0,0);
+            ctx.lineTo(800,0);
+            ctx.stroke();
+
+            ctx.restore();
+            ctx.moveTo(0,10);
+            ctx.lineTo(200,10);
+            ctx.stroke();
+        })();
+    </script>
+</body>
+</html>
