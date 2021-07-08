@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>精灵图面向对象重构</title>
+    <style>
+        canvas {
+            margin:200px 500px 20px 500px;
+        }
+        div {
+            margin: 0 500px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="demo"></canvas>
+    <div>
+        <button id="left">←</button>
+        <button id="up">↑</button>
+        <button id="right">→</button>
+        <button id="down">↓</button>
+    </div>
+    <script src="js/sprite.js"></script>
+    <script>
+        const canvas = document.querySelector("#demo");
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 600;
+        canvas.height = 600;
+        canvas.style.border = '1px solid #000';
+
+
+        let boy = new spirit({
+            imgSrc:'imgs/gameImgs/DMMban.png',
+            x : 200,
+            y : 200,
+            w : 80,
+            h : 130,
+            fps : 10
+        });
+        boy.render(ctx);
+
+        const left = document.querySelector("#left");
+        const up = document.querySelector("#up");
+        const right = document.querySelector("#right");
+        const down = document.querySelector("#down");
+
+        left.addEventListener("click",function () {
+            boy.dirIndex = 1;
+        })
+        right.addEventListener("click",function () {
+            boy.dirIndex = 2;
+        })
+        up.addEventListener("click",function () {
+            boy.dirIndex = 3;
+        })
+        down.addEventListener("click",function () {
+            boy.dirIndex = 0;
+        })
+    </script>
+</body>
+</html>
