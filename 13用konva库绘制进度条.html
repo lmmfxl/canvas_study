@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13用konva库绘制进度条</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no">
+</head>
+<body>
+    <div id="container"></div>
+    <script src="js/lib/konva/konva.js"></script>
+    <script>
+        (function () {
+            //数据初始化
+            const x = 1/8 * window.innerWidth;
+            const y = 1/2 * window.innerHeight;
+            const maxWidth = 3/4 * window.innerWidth;
+            const height = 40;
+
+
+            const stage = new Konva.Stage({
+                width:window.innerWidth,
+                height:window.innerHeight,
+                container:'container'
+            });
+
+            const layer = new Konva.Layer();
+            stage.add(layer);
+
+            const innerRect = new Konva.Rect({
+                x:x,
+                y:y,
+                width:120,
+                height:height,
+                fill:'skyblue',
+                opacity:.5,
+                cornerRadius:height/2
+            });
+            const outRect = new Konva.Rect({
+                x:x,
+                y:y,
+                width:maxWidth,
+                height:height,
+                stroke:'black',
+                strokeWidth:3,
+                cornerRadius:height/2
+            });
+
+            layer.add(outRect);
+            layer.add(innerRect);
+            layer.draw();
+
+            innerRect.to({
+                width:maxWidth,
+                duration:2,
+                easing:Konva.Easings.EaseOut
+            })
+        })();
+    </script>
+</body>
+</html>
