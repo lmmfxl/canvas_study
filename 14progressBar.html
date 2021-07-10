@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14progressBar</title>
+    <style>
+        body {
+            margin:0;
+            padding:0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="js/lib/konva/konva.js"></script>
+    <script src="js/progressBar.js"></script>
+    <script>
+        (function () {
+            const stage = new Konva.Stage({
+                x:0,
+                y:0,
+                width:window.innerWidth,
+                height:window.innerHeight,
+                container:'container'
+            });
+            const layer = new Konva.Layer();
+            stage.add(layer);
+
+            const bar = new progressBar({
+                x:100,
+                y:500,
+                w:500,
+                h:50,
+                fill:'yellow',
+                stroke:'black'
+            });
+            bar.addToLayer(layer);
+            layer.draw();
+            bar.changeValue(80);
+        })();
+    </script>
+</body>
+</html>
