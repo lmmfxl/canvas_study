@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>17面向过程的柱状图</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="js/lib/konva/konva.js"></script>
+    <script>
+        (function () {
+            //数据
+            const data = [
+                {name:'前端',value:'.8',color:'green'},
+                {name:'PHP',value:'.3',color:'blue'},
+                {name:'Java',value:'.7',color:'red'},
+                {name:'UI',value:'.9',color:'orange'},
+                {name:'IOS',value:'.4',color:'purple'},
+                {name:'Android',value:'.9',color:'pink'}
+            ];
+            const stage = new Konva.Stage({
+                container:'container',
+                width:window.innerWidth,
+                height:window.innerHeight
+            });
+            const layer = new Konva.Layer();
+            stage.add(layer);
+
+            const x0 = 1/8 * stage.width();
+            const y0 = 3/4 * stage.height();
+            const maxWidth = 3/4 * stage.width();
+            const maxHeight = 3/4 * stage.height();
+
+            //绘制坐标系
+            const line = new Konva.Line({
+                points:[x0,y0,x0+maxWidth,y0],
+                strokeWidth:1,
+                stroke:'lightgreen'
+            });
+            layer.add(line);
+
+            //绘制柱状图
+            const group = new Konva.Group({
+                x:x0,
+                y:y0
+            });
+            const rectWidth = 1/data.length * maxWidth;
+            data.forEach(function (item,index) {
+                const rect = new Konva.Rect({
+                    x: (index + 1/4) * rectWidth,
+                    y:- item.value * maxHeight,
+                    width:1/2 * rectWidth,
+                    height:item.value * maxHeight,
+                    fill:item.color,
+                    cornerRadius:10
+                });
+                group.add(rect);
+
+                //绘制百分比文字
+                const valueText = new Konva.Text({
+                    fontSize:16,
+                    x: (index) * rectWidth,
+                    y: - item.value * maxHeight - 16,
+                    text:item.value * 100 + '%',
+                    fill:item.color,
+                    width:rectWidth,
+                    align:'center'
+                });
+                group.add(valueText);
+
+                const bottomText = new Konva.Text({
+                    fontSize:16,
+                    x: (index + 1/4)*rectWidth + 1/4 * rectWidth,
+                    y:0,
+                    text:item.name,
+                    rotation:30,
+                    fill:item.color,
+                });
+                group.add(bottomText);
+                layer.add(group);
+            });
+
+            //绘制动画效果
+            stage.on('contentClick',function () {
+                layer.find('Rect').each(function (item,index) {
+
+                    item.y(0);
+                    console.log(item.y());
+                    item.height(0);
+                    console.log(item.height());
+
+                    // item.to({
+                    //     duration:1,
+                    //     y:y0 - data[index].value * maxHeight,
+                    //     height:data[index].value * maxHeight
+                    // })
+                });
+
+
+            })
+
+
+
+
+
+            layer.draw();
+        })();
+    </script>
+</body>
+</html>
