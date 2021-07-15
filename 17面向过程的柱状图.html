@@ -64,7 +64,8 @@
                     text:item.value * 100 + '%',
                     fill:item.color,
                     width:rectWidth,
-                    align:'center'
+                    align:'center',
+                    name:'scale'
                 });
                 group.add(valueText);
 
@@ -82,19 +83,30 @@
 
             //绘制动画效果
             stage.on('contentClick',function () {
-                layer.find('Rect').each(function (item,index) {
-
+                stage.find('Rect').each(function (item,index) {
                     item.y(0);
                     console.log(item.y());
                     item.height(0);
                     console.log(item.height());
 
-                    // item.to({
-                    //     duration:1,
-                    //     y:y0 - data[index].value * maxHeight,
-                    //     height:data[index].value * maxHeight
-                    // })
+                    //柱状图动画
+                    item.to({
+                         duration:1,
+                         y:0 - data[index].value * maxHeight,
+                         height:data[index].value * maxHeight
+                     });
                 });
+
+                //比例文字动画
+                stage.find('.scale').each(function (item,index) {
+                    item.y(-16);
+                    item.to({
+                        duration:1,
+                        y:- data[index].value * maxHeight - 16
+                    });
+
+                });
+
 
 
             })

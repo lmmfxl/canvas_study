@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>18面向对象的柱状图</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="js/lib/konva/konva.js"></script>
+    <script src="js/HistoGram.js"></script>
+    <script>
+        (function () {
+            const data = [
+                {name:'前端',value:'.8',color:'green'},
+                {name:'PHP',value:'.3',color:'blue'},
+                {name:'Java',value:'.7',color:'red'},
+                {name:'UI',value:'.9',color:'orange'},
+                {name:'IOS',value:'.4',color:'purple'},
+                {name:'Android',value:'.9',color:'pink'}
+            ];
+            const stage = new Konva.Stage({
+                container:'container',
+                x:0,
+                y:0,
+                width:window.innerWidth,
+                height:window.innerHeight
+            });
+            const layer = new Konva.Layer();
+            stage.add(layer);
+
+            const histoGram = new HistoGram({
+                x:1/8 * stage.width(),
+                y:3/4 * stage.height(),
+                w:3/4 * stage.width(),
+                h:3/4 * stage.height(),
+                data:data
+            });
+            histoGram.addToLayer(layer);
+            layer.draw();
+            stage.on('contentClick',function () {
+                histoGram.animate();
+            })
+
+        })();
+    </script>
+</body>
+</html>
