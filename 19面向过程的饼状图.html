@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19面向过程的饼状图</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="js/lib/konva/konva.js"></script>
+    <script>
+        (function () {
+            //数据
+            const data = [
+                {name:'前端',value:'.2',color:'green'},
+                {name:'PHP',value:'.3',color:'blue'},
+                {name:'Java',value:'.15',color:'red'},
+                {name:'UI',value:'.2',color:'orange'},
+                {name:'IOS',value:'.15',color:'purple'}
+            ]
+
+            const stage = new Konva.Stage({
+                width:window.innerWidth,
+                height:window.innerHeight,
+                container:'container'
+            });
+            const layer = new Konva.Layer({
+                x:window.innerWidth / 2,
+                y:window.innerHeight / 2
+            })
+            stage.add(layer);
+
+            //绘制饼状图
+            let start = -90;
+            data.forEach(function (item,index) {
+                const wedge = new Konva.Wedge({
+                    x:0,
+                    y:0,
+                    radius:80,
+                    rotation:start,
+                    angle:item.value*360,
+                    fill:item.color
+                });
+
+                const wedgeText = new Konva.Text({
+                    x:100*Math.cos( (item.value*360 / 2 + start)*Math.PI/180),
+                    y:100*Math.sin( (item.value*360 / 2 + start)*Math.PI/180),
+                    text:item.name,
+                    fill:item.color
+                });
+                if ((item.value*360 / 2 + start)>90 && (item.value*360 / 2 + start)<270){
+                    wedgeText.x(wedgeText.x() - wedgeText.width());
+                };
+                start += item.value*360;
+                layer.add(wedge);
+                layer.add(wedgeText);
+            });
+            layer.draw();
+
+            let index = 0;
+            function animate() {
+                const wedges = layer.find('Wedge');
+                const item = wedges[index];
+                item.angle(0);
+                item.to({
+                    duration:2*data[index].value,
+                    angle:data[index].value*360,
+                    onFinish:function () {
+                        index ++;
+                        if (index >= data.length){
+                            return;
+                        }
+                        animate();
+
+                    }
+                })
+
+            };
+            animate();
+
+        })();
+    </script>
+</body>
+</html>
